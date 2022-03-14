@@ -1,0 +1,72 @@
+#Imports necessary libraries 
+#re - regular expression operrations
+#math - for math calculations
+import re
+import math
+
+#Reads the first line of the input (number of messages)
+n = input()
+
+#Compiles all the messages into a list
+msg_list = []
+for i in range(0,int(n)):
+    msg_list.append(input())
+
+#Because python round() behaves in a weird way, a /correct/ rounding function is defined
+def normal_round(n):
+    if n - math.floor(n) < 0.5:
+        return math.floor(n)
+    return math.ceil(n)
+
+#Exponents will yield True on isdigit() functions but it cant be converted into int or float
+#This function will try to catch those errors
+def not_exponent(x):
+    try:
+        int(x)
+        return True
+    except ValueError:
+        return False
+
+#Decodes each messages one by one
+def decoder(msg, i):
+
+    #Splits the message into characters and integers
+    coded = re.split('(\d+)', msg[i])
+    coded_fine = []
+    coded_finer = []
+    decoded_message = []
+
+    for j in range(0, len(coded)):
+        if coded[j].isdigit() and not_exponent(coded[j]):
+            coded_fine.append(int(coded[j]))
+        else:
+            coded_fine.append(coded[j])
+
+    for i in range(0, len(coded_fine)):
+        if type(coded_fine[i]) == int:
+            coded_finer.append(coded_fine[i])
+        if type(coded_fine[i]) == str:
+            a = list(coded_fine[i])
+            for i in range(0, len(a)):
+                coded_finer.append(a[i])
+
+    #Checks if an integer is followed by a character. 
+    x = len(coded_finer)
+    for i in range(0, x):
+        if type(coded_finer[i]) == int:
+            decoded_message.append(coded_finer[i+1] * coded_finer[i])
+        if type(coded_finer[i]) == str and type(coded_finer[i-1]) == str:
+            decoded_message.append(coded_finer[i])
+
+    uncompressed_message = ''.join(decoded_message)
+
+    return uncompressed_message
+
+#Decodes every messages one by one
+for i in range(0, (int(n))):
+    a = len(list(msg_list[i]))
+    b = decoder(msg_list, i)
+    d = len(b)
+    c = d/a
+    print (normal_round(c), b) 
+    
