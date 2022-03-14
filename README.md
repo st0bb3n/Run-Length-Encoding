@@ -7,7 +7,7 @@ SE01
 
 Steps to run (by OS)
 
----Windows---
+# Windows
 0. Install Python version 3.9.2 or later
 1. Run PowerShell 7 in the same directory of the code
 2. Input the following commands
@@ -16,7 +16,7 @@ PS> $OutputEncoding = [Console]::OutputEncoding = (New-Object System.Text.UTF8En
 PS> $env:PYTHONIOENCODING = "utf-8"
 PS> Get-Content [input_filename.txt] | python3 coe164_se01.py | Out-File [output_filename.txt]
 
----Linux Distro/Mac OS/Unix-Based OS---
+# Linux Distro/Mac OS/Unix-Based OS
 0. Install Python version 3.9.2 or later
 1. Run Terminal
 2. Input the following command
