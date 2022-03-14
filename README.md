@@ -2,10 +2,7 @@
 
 Steven Esguerra
 2019-0XXXX
-CoE 164 - FWX
-SE01
-
-Steps to run (by OS)
+CoE 164 SE01
 
 # Windows
 0. Install Python version 3.9.2 or later
